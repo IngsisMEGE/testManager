@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  testManagerPostgres:
+    image: postgres:latest
+    ports:
+      - "5437:5437"
+    env_file:
+      - .env
+    volumes:
+      - test_manager_data:/var/lib/postgresql/data
+
+volumes:
+    test_manager_data:
+    blob:
+        external: false
