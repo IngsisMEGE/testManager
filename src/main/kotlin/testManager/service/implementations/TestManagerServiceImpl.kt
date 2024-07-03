@@ -31,6 +31,11 @@ class TestManagerServiceImpl(
         }
     }
 
+    @Transactional
+    override fun deleteTest(id: Long) {
+        testRepository.deleteById(id)
+    }
+
     private fun createTest(test: TestInputDTO): TestOutputDTO {
         val savedTest = testRepository.save(Test(snippetId = test.snippetId, name = test.name))
         val savedInputs = saveInputs(test.inputs, savedTest)
