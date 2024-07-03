@@ -8,8 +8,8 @@ import jakarta.persistence.ManyToOne
 
 @Entity
 data class TestEnv(
-    val key: String,
-    val value: String,
+    val envKey: String,
+    val envValue: String,
     @ManyToOne
     val test: Test,
 ) : BaseEntity() {
