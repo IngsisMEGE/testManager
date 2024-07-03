@@ -1,6 +1,10 @@
 package testManager.repository
 
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.stereotype.Repository
 import testManager.entity.TestEnv
 
-interface TestEnvRepository : JpaRepository<TestEnv, Long>
+@Repository
+interface TestEnvRepository : JpaRepository<TestEnv, Long> {
+    fun deleteAllByTestId(testId: Long)
+}

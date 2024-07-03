@@ -10,7 +10,7 @@ import jakarta.persistence.OneToMany
 @Entity
 data class Test(
     val snippetId: Long,
-    val name: String,
+    var name: String,
     @OneToMany(mappedBy = "test", cascade = [CascadeType.REMOVE])
     val testOutputs: List<TestOutput> = mutableListOf(),
     @OneToMany(mappedBy = "test", cascade = [CascadeType.REMOVE])

@@ -24,4 +24,9 @@ class GlobalExceptionHandler {
     fun handleAccessDeniedException(ex: AccessDeniedException): ResponseEntity<String> {
         return ResponseEntity.status(403).body(ex.message)
     }
+
+    @ExceptionHandler(NoSuchElementException::class)
+    fun handleNoSuchElementException(ex: NoSuchElementException): ResponseEntity<String> {
+        return ResponseEntity.status(404).body(ex.message)
+    }
 }
