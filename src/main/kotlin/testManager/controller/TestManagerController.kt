@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.oauth2.jwt.Jwt
 import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -36,5 +37,12 @@ class TestManagerController(val testManagerService: TestManagerService) {
     ): ResponseEntity<Unit> {
         if (userData.claims["email"] != authorEmail) throw AccessDeniedException("No tienes permisos para realizar esta acción")
         return ResponseEntity.ok(testManagerService.deleteTest(id))
+    }
+
+    @GetMapping("/get/{snippetId}")
+    fun getTests(
+        @PathVariable snippetId: Long,
+    ): ResponseEntity<List<TestOutputDTO>> {
+        return ResponseEntity.ok(testManagerService.getTests(snippetId))
     }
 }

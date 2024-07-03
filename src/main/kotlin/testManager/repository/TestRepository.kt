@@ -5,4 +5,6 @@ import org.springframework.stereotype.Repository
 import testManager.entity.Test
 
 @Repository
-interface TestRepository : JpaRepository<Test, Long>
+interface TestRepository : JpaRepository<Test, Long> {
+    fun findAllBySnippetId(snippetId: Long): List<Test>
+}

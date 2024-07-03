@@ -36,6 +36,13 @@ class TestManagerServiceImpl(
         testRepository.deleteById(id)
     }
 
+    override fun getTests(snippetId: Long): List<TestOutputDTO> {
+        val tests = testRepository.findAllBySnippetId(snippetId)
+        return tests.map { test ->
+            constructTestOutputDTO(test, test.testInputs, test.testOutputs, test.testEnvs)
+        }
+    }
+
     private fun createTest(test: TestInputDTO): TestOutputDTO {
         val savedTest = testRepository.save(Test(snippetId = test.snippetId, name = test.name))
         val savedInputs = saveInputs(test.inputs, savedTest)
