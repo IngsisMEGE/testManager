@@ -87,7 +87,7 @@ class TestManagerServiceImpl(
         testEnvRepository.saveAll(
             envs.split(";").map { env ->
                 val (key, value) = env.split("=")
-                TestEnv(test = test, key = key, value = value)
+                TestEnv(test = test, envKey = key, envValue = value)
             },
         )
 
@@ -103,6 +103,6 @@ class TestManagerServiceImpl(
             name = test.name,
             inputs = inputs.map { it.input },
             outputs = outputs.map { it.output },
-            envs = envs.map { TestEnvDto(it.key, it.value) },
+            envs = envs.map { TestEnvDto(it.envKey, it.envValue) },
         )
 }
