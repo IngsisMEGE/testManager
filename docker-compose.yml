@@ -10,6 +10,19 @@ services:
     volumes:
       - test_manager_data:/var/lib/postgresql/data
 
+  testManager:
+    image: testmanager
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    env_file:
+      - .env
+    depends_on:
+      - testManagerPostgres
+
+
 volumes:
     test_manager_data:
     blob:
