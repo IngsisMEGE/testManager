@@ -91,8 +91,7 @@ class TestManagerControllerTest {
                         "snippetId": 1,
                         "name": "Test",
                         "inputs": ["Test"],
-                        "outputs": ["Test"],
-                        "authorEmail": "test@test.com"
+                        "outputs": ["Test"]
                     }
                     """.trimIndent(),
                 ),
