@@ -60,3 +60,15 @@ jobs:
           tags: |
             ghcr.io/ingsismege/testmanager:latest.SNAPSHOT
             ghcr.io/ingsismege/testmanager:${{ env.VERSION }}.SNAPSHOT
+            
+      - name: Update dev server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST_DEV }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.KEY_DEV }}
+          script: |
+            cd INFRAingsis/dev/
+            docker compose -f docker-compose.dev.yml stop testManagerApi
+            docker compose -f docker-compose.dev.yml pull testManagerApi
+            docker compose -f docker-compose.dev.yml up testManagerApi -d --build
