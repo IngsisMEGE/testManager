@@ -6,10 +6,5 @@ data class TestOutputDTO(
     val name: String,
     val inputs: List<String>,
     val outputs: List<String>,
-    val envs: List<TestEnvDto>,
-)
-
-data class TestEnvDto(
-    val name: String,
-    val value: String,
+    val envs: String,
 )

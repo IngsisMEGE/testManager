@@ -3,7 +3,6 @@ package testManager.service.implementations
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import testManager.controller.payload.request.TestInputDTO
-import testManager.controller.payload.response.TestEnvDto
 import testManager.controller.payload.response.TestOutputDTO
 import testManager.entity.Test
 import testManager.entity.TestEnv
@@ -84,12 +83,16 @@ class TestManagerServiceImpl(
         envs: String,
         test: Test,
     ): List<TestEnv> =
-        testEnvRepository.saveAll(
-            envs.split(";").map { env ->
-                val (key, value) = env.split("=")
-                TestEnv(test = test, envKey = key, envValue = value)
-            },
-        )
+        if (envs.isEmpty()) {
+            emptyList()
+        } else {
+            testEnvRepository.saveAll(
+                envs.split(";").map { env ->
+                    val (key, value) = env.split("=")
+                    TestEnv(test = test, envKey = key, envValue = value)
+                },
+            )
+        }
 
     private fun constructTestOutputDTO(
         test: Test,
@@ -103,6 +106,8 @@ class TestManagerServiceImpl(
             name = test.name,
             inputs = inputs.map { it.input },
             outputs = outputs.map { it.output },
-            envs = envs.map { TestEnvDto(it.envKey, it.envValue) },
+            envs = envToString(envs),
         )
+
+    private fun envToString(envs: List<TestEnv>): String = envs.joinToString(";") { "${it.envKey}=${it.envValue}" }
 }
