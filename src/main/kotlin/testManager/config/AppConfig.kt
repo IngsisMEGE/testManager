@@ -12,10 +12,10 @@ class AppConfig {
         return object : WebMvcConfigurer {
             override fun addCorsMappings(registry: CorsRegistry) {
                 registry.addMapping("/**")
-//                    .allowedOrigins("*")
-//                    .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-//                    .allowedHeaders("*")
-//                    .allowCredentials(false)
+                    .allowedOrigins("*")
+                    .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                    .allowedHeaders("*")
+                    .allowCredentials(false)
             }
         }
     }
